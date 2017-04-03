@@ -1,21 +1,24 @@
-package grails.events.annotation
+package grails.events
 
 import grails.events.bus.EventBusAware
-import org.grails.events.transform.AnnotatedSubscriber
 import spock.lang.Specification
 
+import javax.annotation.PostConstruct
 import java.util.concurrent.atomic.AtomicInteger
 
-class PubSubSpec extends Specification {
+/**
+ * Created by graemerocher on 03/04/2017.
+ */
+class ManualPubSubSpec extends Specification {
 
     void "test pub/sub with default event bus"() {
         given:
         SumService sumService = new SumService()
         TotalService totalService = new TotalService()
-        AnnotatedSubscriber annotatedSubscriber = (AnnotatedSubscriber)totalService
+        EventBusAware annotatedSubscriber = (EventBusAware)totalService
         EventBusAware publisher = (EventBusAware)sumService
         annotatedSubscriber.setTargetEventBus(publisher.getEventBus())
-        annotatedSubscriber.registerMethods()
+        totalService.init()
 
         when:
         sumService.sum(1,2)
@@ -27,20 +30,24 @@ class PubSubSpec extends Specification {
 }
 
 // tag::publisher[]
-class SumService {
-    @Publisher
+class SumService implements EventPublisher {
     int sum(int a, int b) {
-        a + b
+        int result = a + b
+        notify("sum", result)
+        return result
     }
 }
 // end::publisher[]
 
 // tag::subscriber[]
-class TotalService {
+class TotalService implements EventBusAware {
     AtomicInteger total = new AtomicInteger(0)
-    @Subscriber
-    void onSum(int num) {
-        total.addAndGet(num)
+
+    @PostConstruct
+    void init() {
+        eventBus.subscribe("sum") { int num ->
+            total.addAndGet(num)
+        }
     }
 }
 // end::subscriber[]
