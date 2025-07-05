@@ -1,10 +1,5 @@
-rootProject.name = 'Grace.Async'
+rootProject.name = 'Grace.Events'
 
-include 'grace-async-core'
-include 'grace-async-gpars'
-include 'grace-async-rxjava'
-include 'grace-async-rxjava2'
-include 'grace-async-rxjava3'
 include 'grace-events-core'
 include 'grace-events-compat'
 include 'grace-events-transform'
@@ -13,7 +8,6 @@ include 'grace-events-spring'
 include 'grace-events-rxjava'
 include 'grace-events-rxjava2'
 include 'grace-events-rxjava3'
-include 'grace-plugin-async'
 include 'grace-plugin-events'
 
 // examples
