@@ -5,8 +5,8 @@
 [![Grace on X](https://img.shields.io/twitter/follow/graceframework?style=social)](https://x.com/graceframework)
 
 [![Groovy Version](https://img.shields.io/badge/Groovy-4.0.27-blue?style=flat&color=4298b8)](https://groovy-lang.org/releasenotes/groovy-4.0.html)
-[![Grace Version](https://img.shields.io/badge/Grace-2023.3.0-blue?style=flat&color=f49b06)](https://github.com/graceframework/grace-framework/releases/tag/v2023.3.0-RC2)
-[![Spring Boot Version](https://img.shields.io/badge/Spring_Boot-3.3.12-blue?style=flat&color=6db33f)](https://github.com/spring-projects/spring-boot/releases/tag/v3.3.12)
+[![Grace Version](https://img.shields.io/badge/Grace-2024.0.0-blue?style=flat&color=f49b06)](https://github.com/graceframework/grace-framework/releases/tag/v2024.0.0-M1)
+[![Spring Boot Version](https://img.shields.io/badge/Spring_Boot-3.4.7-blue?style=flat&color=6db33f)](https://github.com/spring-projects/spring-boot/releases/tag/v3.4.7)
 
 # Grace Events Framework
 
@@ -18,6 +18,7 @@ To make it easier for users to use and upgrade, Plugin adopts a version policy c
 
 | Plugin Version | Grace Version |
 |----------------|---------------|
+| 7.0.x          | 2024.0.x      |
 | 6.3.x          | 2023.3.x      |
 | 6.2.x          | 2023.2.x      |
 | 6.1.x          | 2023.1.x      |
@@ -26,7 +27,12 @@ To make it easier for users to use and upgrade, Plugin adopts a version policy c
 | 5.1.x          | 2022.1.x      |
 | 5.0.x          | 2022.0.x      |
 
+## Ducumentation
+
+* [7.0.x](https://graceframework.org/grace-events/7.0.x/)
+
 ## Links
 
 - [Grace Framework](https://github.com/graceframework/grace-framework)
+- [Grace Async](https://github.com/graceframework/grace-async)
 - [Grace Plugins](https://github.com/grace-plugins)
