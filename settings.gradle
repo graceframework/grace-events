@@ -7,7 +7,6 @@ include 'grace-events-rxjava2'
 include 'grace-events-rxjava3'
 include 'grace-events-spring'
 include 'grace-events-transform'
-include 'grace-plugin-events'
 
 // examples
 // include 'pubsub-demo'
