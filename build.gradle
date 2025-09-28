@@ -113,6 +113,7 @@ subprojects { project->
             api "org.apache.groovy:groovy"
             api "org.slf4j:slf4j-api"
 
+            testImplementation "org.slf4j:slf4j-simple"
             testImplementation "org.spockframework:spock-core", {
                 exclude group: "org.junit.platform", module: "junit-platform-engine"
             }

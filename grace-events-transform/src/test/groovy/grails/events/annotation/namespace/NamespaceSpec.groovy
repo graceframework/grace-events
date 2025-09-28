@@ -7,6 +7,7 @@ import grails.events.annotation.Subscriber
 import grails.events.bus.EventBusAware
 import org.grails.events.transform.AnnotatedSubscriber
 import spock.lang.Specification
+import spock.util.concurrent.PollingConditions
 
 import java.util.concurrent.atomic.AtomicInteger
 
@@ -17,6 +18,7 @@ class NamespaceSpec extends Specification {
 
     void "test pub/sub with default event bus"() {
         given:
+        def conditions = new PollingConditions(timeout: 5)
         SumService sumService = new SumService()
         TotalService totalService = new TotalService()
         AnnotatedSubscriber annotatedSubscriber = (AnnotatedSubscriber)totalService
@@ -29,8 +31,10 @@ class NamespaceSpec extends Specification {
         sumService.sum(1,2)
 
         then:
-        totalService.total.intValue() == 6
-        totalService.eventId == "math:sum"
+        conditions.eventually {
+            totalService.total.intValue() == 6
+            totalService.eventId == "math:sum"
+        }
     }
 }
 
