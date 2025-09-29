@@ -1,4 +1,8 @@
+plugins {
+    id 'grace.build.common'
+}
+
 dependencies {
-    api project(":grace-events-core")
-    implementation "io.reactivex.rxjava3:rxjava"
+    api project(':grace-events-core')
+    implementation libs.rxjava3
 }

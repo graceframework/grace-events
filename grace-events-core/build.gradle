@@ -1,4 +1,8 @@
+plugins {
+    id 'grace.build.common'
+}
+
 dependencies {
-    api "org.springframework:spring-context"
-    api "org.springframework:spring-tx"
+    api libs.spring.context
+    api libs.spring.tx
 }

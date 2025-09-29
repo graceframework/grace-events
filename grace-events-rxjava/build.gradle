@@ -1,9 +1,13 @@
-dependencies {
-    api project(":grace-events-core")
-    implementation "io.reactivex:rxjava"
+plugins {
+    id 'grace.build.common'
+}
 
-    testImplementation project(":grace-events-transform")
-    testImplementation "org.graceframework:grace-datastore-gorm-test", {
-        exclude group:'org.graceframework', module:'grace-datastore-gorm-validation'
+dependencies {
+    api project(':grace-events-core')
+    implementation libs.rxjava
+
+    testImplementation project(':grace-events-transform')
+    testImplementation libs.grace.datastore.gorm.test, {
+        exclude group: 'org.graceframework', module: 'grace-datastore-gorm-validation'
     }
 }

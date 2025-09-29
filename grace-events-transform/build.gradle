@@ -1,16 +1,20 @@
+plugins {
+    id 'grace.build.common'
+}
+
 dependencies {
-    api project(":grace-events-core")
-    api "jakarta.annotation:jakarta.annotation-api"
-    compileOnly "org.graceframework:grace-datastore-core", {
+    api project(':grace-events-core')
+    api libs.jakarta.annotation.api
+    compileOnly libs.grace.datastore.core, {
         transitive = false
     }
-    compileOnly "org.graceframework:grace-datastore-gorm", {
+    compileOnly libs.grace.datastore.gorm, {
         transitive = false
     }
 
-    testRuntimeOnly "org.springframework:spring-aop"
-    testRuntimeOnly "org.springframework:spring-expression"
-    testImplementation "org.graceframework:grace-datastore-gorm-test", {
-        exclude group:'org.graceframework', module:'grace-datastore-gorm-validation'
+    testRuntimeOnly libs.spring.aop
+    testRuntimeOnly libs.spring.expression
+    testImplementation libs.grace.datastore.gorm.test, {
+        exclude group: 'org.graceframework', module: 'grace-datastore-gorm-validation'
     }
 }
