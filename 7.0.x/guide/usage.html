@@ -91,10 +91,7 @@ function addJsClass() {
                 <div id="table-of-content">
                     <h2>Table of Contents</h2>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#async"><strong>3.1</strong><span>Async Plugin</span></a>
-                    </div>
-                    
-                    <div class="toc-item" style="margin-left:0px"><a href="#events"><strong>3.2</strong><span>Events Plugin</span></a>
+                    <div class="toc-item" style="margin-left:0px"><a href="#events"><strong>3.1</strong><span>Events Plugin</span></a>
                     </div>
                     
                 </div>
@@ -114,81 +111,7 @@ function addJsClass() {
 
 
 
-<h2 id="async"><a class="anchor" href="#async"></a>3.1 Async Plugin</h2>
-
-<div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/graceframework/grace-events/edit/7.0.x/src/main/docs/guide/async.adoc"'>
-        <i class='fa fa-pencil-square-o'></i> Improve this doc
-    </button>
-</div>
-
-
-<div class="paragraph">
-<p>To use the Async framework you should add a dependency on the <code>async</code> plugin to your <code>build.gradle</code> file:</p>
-</div>
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy">implementation "org.graceframework.plugins:async:7.0.0-SNAPSHOT"</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>By default the <code>Promises</code> static methods use an instance of <code>PromiseFactory</code>. This <code>PromiseFactory</code> interface has various implementations.
-The default implementation is <a href="../api/org/grails/async/factory/future/CachedThreadPoolPromiseFactory.html">CachedThreadPoolPromiseFactory</a> which uses a thread pool that will create threads as needed (the same as <code>java.util.concurrent.Executors.newCachedThreadPool()</code>)</p>
-</div>
-<div class="paragraph">
-<p>However, the design of the promises framework is such that you can swap out the underlying implementation for your own or one of the pre-supported implementations.
-For example to use RxJava 1.x simply add the RxJava dependency to <code>build.gradle</code>:</p>
-</div>
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy">implementation "org.graceframework:grace-async-rxjava:7.0.0-SNAPSHOT"</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The following table summarizes async framework support and the necessary dependency:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. PromiseFactory Implementations</caption>
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Framework</th>
-<th class="tableblock halign-left valign-top">Dependency</th>
-<th class="tableblock halign-left valign-top">Implementation Class</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">GPars 1.2.x</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>grace-async-gpars</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.grails.async.factory.gpars.GparsPromiseFactory</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">RxJava 1.2.x</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>grace-async-rxjava</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.grails.async.factory.rxjava.RxPromiseFactory</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">RxJava 2.x</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>grace-async-rxjava2</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.grails.async.factory.rxjava2.RxPromiseFactory</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">RxJava 3.x</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>grace-async-rxjava3</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.grails.async.factory.rxjava3.RxPromiseFactory</code></p></td>
-</tr>
-</tbody>
-</table>
-
-
-<h2 id="events"><a class="anchor" href="#events"></a>3.2 Events Plugin</h2>
+<h2 id="events"><a class="anchor" href="#events"></a>3.1 Events Plugin</h2>
 
 <div class='contribute-btn'>
     <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/graceframework/grace-events/edit/7.0.x/src/main/docs/guide/events.adoc"'>
@@ -210,8 +133,20 @@ Like the <code>PromiseFactory</code> notion, there are implementations of the <c
 <div class="listingblock">
 <div class="title">build.gradle</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy">implementation "org.graceframework.plugins:events:7.0.0-SNAPSHOT"</code></pre>
+<pre class="CodeRay highlight"><code data-lang="groovy">implementation "org.graceframework:grace-plugin-events"</code></pre>
 </div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Since 7.0, Grace <code>events</code> modules have already been split into its' own repository <a href="https://github.com/graceframework/grace-events"><code>grace-events</code></a>. And <code>grace-plugin-events</code> have been merged into the <a href="https://github.com/graceframework/grace-framework/tree/2024.0.x/grace-plugin-events">Grace framework</a>.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>If no asynchronous framework in present on the classpath then by default Grace creates an EventBus based off of the currently active <code>PromiseFactory</code>.

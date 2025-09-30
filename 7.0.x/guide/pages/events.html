@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>3.2 Events Plugin 7.0.0-SNAPSHOT</title>
+    <title>3.1 Events Plugin 7.0.0-SNAPSHOT</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -82,7 +82,7 @@ function addJsClass() {
 
 
                 <div class="project">
-                    <h1>3.2 Events Plugin</h1>
+                    <h1>3.1 Events Plugin</h1>
 
                     <p><strong>Version:</strong> 7.0.0-SNAPSHOT</p>
                 </div>
@@ -91,7 +91,7 @@ function addJsClass() {
 
                 
 
-<h2 id="events"><a class="anchor" href="#events"></a>3.2 Events Plugin</h2>
+<h2 id="events"><a class="anchor" href="#events"></a>3.1 Events Plugin</h2>
 
 <div class='contribute-btn'>
     <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/graceframework/grace-events/edit/7.0.x/src/main/docs/guide/events.adoc"'>
@@ -113,8 +113,20 @@ Like the <code>PromiseFactory</code> notion, there are implementations of the <c
 <div class="listingblock">
 <div class="title">build.gradle</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy">implementation "org.graceframework.plugins:events:7.0.0-SNAPSHOT"</code></pre>
+<pre class="CodeRay highlight"><code data-lang="groovy">implementation "org.graceframework:grace-plugin-events"</code></pre>
 </div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Since 7.0, Grace <code>events</code> modules have already been split into its' own repository <a href="https://github.com/graceframework/grace-events"><code>grace-events</code></a>. And <code>grace-plugin-events</code> have been merged into the <a href="https://github.com/graceframework/grace-framework/tree/2024.0.x/grace-plugin-events">Grace framework</a>.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>If no asynchronous framework in present on the classpath then by default Grace creates an EventBus based off of the currently active <code>PromiseFactory</code>.

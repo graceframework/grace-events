@@ -82,13 +82,13 @@ function addJsClass(el) {
                             
                             <div class="toc-item" style="margin-left:0px"><a href="#releases"><strong>2</strong><span>Release History</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:10px"><a href="#6.x"><strong>2.1</strong><span>What's new in 6.x</span></a></div>
+                            <div class="toc-item" style="margin-left:10px"><a href="#7.x"><strong>2.1</strong><span>What's new in 7.x</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:10px"><a href="#6.x"><strong>2.2</strong><span>What's new in 6.x</span></a></div>
                             
                             <div class="toc-item" style="margin-left:0px"><a href="#usage"><strong>3</strong><span>Usage</span></a></div>
                             
-                            <div class="toc-item" style="margin-left:10px"><a href="#async"><strong>3.1</strong><span>Async Plugin</span></a></div>
-                            
-                            <div class="toc-item" style="margin-left:10px"><a href="#events"><strong>3.2</strong><span>Events Plugin</span></a></div>
+                            <div class="toc-item" style="margin-left:10px"><a href="#events"><strong>3.1</strong><span>Events Plugin</span></a></div>
                             
                             <div class="toc-item" style="margin-left:0px"><a href="#support"><strong>4</strong><span>Support</span></a></div>
                             
@@ -138,6 +138,10 @@ and the Events framework provides a new Events API that replaces the previous im
 <td class="tableblock halign-left valign-top"><p class="tableblock">Grace Version</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/graceframework/grace-events/tree/7.0.x">7.0.x</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2024.0.x</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://github.com/graceframework/grace-events/tree/6.3.x">6.3.x</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2023.3.x</p></td>
 </tr>
@@ -169,7 +173,158 @@ and the Events framework provides a new Events API that replaces the previous im
 </table>
 
 
-<h2 id="6.x"><a class="anchor" href="#6.x"></a>2.1 What's new in 6.x</h2>
+<h2 id="7.x"><a class="anchor" href="#7.x"></a>2.1 What's new in 7.x</h2>
+
+<div class='contribute-btn'>
+    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/graceframework/grace-events/edit/7.0.x/src/main/docs/guide/releases/7.x.adoc"'>
+        <i class='fa fa-pencil-square-o'></i> Improve this doc
+    </button>
+</div>
+
+
+<div class="sect2">
+<h3 id="_7_0_0_m1">7.0.0-M1</h3>
+<div class="paragraph">
+<p><a href="https://github.com/graceframework/grace-events/releases/tag/v7.0.0-M1">release notes</a></p>
+</div>
+<div class="paragraph">
+<p>⭐️ New Features</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Restructure Gradle builds <a href="https://github.com/graceframework/grace-events/issues/8">#8</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Use Gradle version catalog to simplify dependency management</p>
+</li>
+<li>
+<p>Sharing Build Logic using buildSrc</p>
+</li>
+<li>
+<p>Update Checkstyle and CodeNarc plugin</p>
+</li>
+<li>
+<p>Update CI to skip checkstyle and codenarc</p>
+</li>
+<li>
+<p>Remove publishing directory</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>⚡️ Breaking Changes</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Move <code>grace-plugin-events</code> to the core framework <a href="https://github.com/graceframework/grace-events/issues/7">#7</a></p>
+</li>
+<li>
+<p>Change grace-events-* submodules' group to 'org.graceframework.events' <a href="https://github.com/graceframework/grace-events/issues/5">#5</a></p>
+</li>
+<li>
+<p>Remove deprecated <code>grace-events-compat</code> <a href="https://github.com/graceframework/grace-events/issues/4">#4</a></p>
+</li>
+<li>
+<p>Split grace-events to its' own repo <a href="https://github.com/graceframework/grace-events/issues/1">#1</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>🛠 Improvements</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Update docs</p>
+</li>
+<li>
+<p>Code formatting</p>
+</li>
+<li>
+<p>Update tests</p>
+</li>
+<li>
+<p>Update README</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Add document links</p>
+</li>
+<li>
+<p>Update badge versions of Grace and Spring Boot</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>🐞 Bug Fixes</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Fixes groovydoc task: because no Groovy Jar was found on class path</p>
+</li>
+<li>
+<p>Remove deprecated gradle/actions/wrapper-validation</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>🚀 Dependency Upgrades</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Upgrade to Grace 2024.0.0-M1 <a href="https://github.com/graceframework/grace-events/issues/2">#2</a></p>
+</li>
+<li>
+<p>Upgrade to Gradle 8.14.3 <a href="https://github.com/graceframework/grace-events/issues/6">#6</a></p>
+</li>
+<li>
+<p>Upgrade to Groovy 4.0.27 <a href="https://github.com/graceframework/grace-events/issues/3">#3</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>⚙️ Tasks</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Enables code style checking in CI</p>
+</li>
+<li>
+<p>Enables testing in CI</p>
+</li>
+<li>
+<p>Bump gradle/actions from 4.0.0 to 4.4.2</p>
+</li>
+<li>
+<p>Bump actions/checkout from 4 to 5</p>
+</li>
+<li>
+<p>Migrate to Central Portal OSSRH Staging API</p>
+</li>
+<li>
+<p>Update GitHub workflows - Switch to 7.0.x</p>
+</li>
+<li>
+<p>Bump version: 7.0.0-SNAPSHOT</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+<h2 id="6.x"><a class="anchor" href="#6.x"></a>2.2 What's new in 6.x</h2>
 
 <div class='contribute-btn'>
     <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/graceframework/grace-events/edit/7.0.x/src/main/docs/guide/releases/6.x.adoc"'>
@@ -977,81 +1132,7 @@ and the Events framework provides a new Events API that replaces the previous im
 
 
 
-<h2 id="async"><a class="anchor" href="#async"></a>3.1 Async Plugin</h2>
-
-<div class='contribute-btn'>
-    <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/graceframework/grace-events/edit/7.0.x/src/main/docs/guide/async.adoc"'>
-        <i class='fa fa-pencil-square-o'></i> Improve this doc
-    </button>
-</div>
-
-
-<div class="paragraph">
-<p>To use the Async framework you should add a dependency on the <code>async</code> plugin to your <code>build.gradle</code> file:</p>
-</div>
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy">implementation "org.graceframework.plugins:async:7.0.0-SNAPSHOT"</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>By default the <code>Promises</code> static methods use an instance of <code>PromiseFactory</code>. This <code>PromiseFactory</code> interface has various implementations.
-The default implementation is <a href="../api/org/grails/async/factory/future/CachedThreadPoolPromiseFactory.html">CachedThreadPoolPromiseFactory</a> which uses a thread pool that will create threads as needed (the same as <code>java.util.concurrent.Executors.newCachedThreadPool()</code>)</p>
-</div>
-<div class="paragraph">
-<p>However, the design of the promises framework is such that you can swap out the underlying implementation for your own or one of the pre-supported implementations.
-For example to use RxJava 1.x simply add the RxJava dependency to <code>build.gradle</code>:</p>
-</div>
-<div class="listingblock">
-<div class="title">build.gradle</div>
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy">implementation "org.graceframework:grace-async-rxjava:7.0.0-SNAPSHOT"</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The following table summarizes async framework support and the necessary dependency:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. PromiseFactory Implementations</caption>
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Framework</th>
-<th class="tableblock halign-left valign-top">Dependency</th>
-<th class="tableblock halign-left valign-top">Implementation Class</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">GPars 1.2.x</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>grace-async-gpars</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.grails.async.factory.gpars.GparsPromiseFactory</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">RxJava 1.2.x</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>grace-async-rxjava</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.grails.async.factory.rxjava.RxPromiseFactory</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">RxJava 2.x</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>grace-async-rxjava2</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.grails.async.factory.rxjava2.RxPromiseFactory</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">RxJava 3.x</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>grace-async-rxjava3</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.grails.async.factory.rxjava3.RxPromiseFactory</code></p></td>
-</tr>
-</tbody>
-</table>
-
-
-<h2 id="events"><a class="anchor" href="#events"></a>3.2 Events Plugin</h2>
+<h2 id="events"><a class="anchor" href="#events"></a>3.1 Events Plugin</h2>
 
 <div class='contribute-btn'>
     <button type='button' class='btn btn-default' onclick='window.location.href="https://github.com/graceframework/grace-events/edit/7.0.x/src/main/docs/guide/events.adoc"'>
@@ -1073,8 +1154,20 @@ Like the <code>PromiseFactory</code> notion, there are implementations of the <c
 <div class="listingblock">
 <div class="title">build.gradle</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="groovy">implementation "org.graceframework.plugins:events:7.0.0-SNAPSHOT"</code></pre>
+<pre class="CodeRay highlight"><code data-lang="groovy">implementation "org.graceframework:grace-plugin-events"</code></pre>
 </div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Since 7.0, Grace <code>events</code> modules have already been split into its' own repository <a href="https://github.com/graceframework/grace-events"><code>grace-events</code></a>. And <code>grace-plugin-events</code> have been merged into the <a href="https://github.com/graceframework/grace-framework/tree/2024.0.x/grace-plugin-events">Grace framework</a>.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>If no asynchronous framework in present on the classpath then by default Grace creates an EventBus based off of the currently active <code>PromiseFactory</code>.

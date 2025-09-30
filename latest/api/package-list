@@ -1,4 +1,3 @@
-grails.artefact
 grails.events
 grails.events.annotation
 grails.events.annotation.gorm
@@ -17,9 +16,3 @@ org.grails.events.rxjava2
 org.grails.events.rxjava3
 org.grails.events.spring
 org.grails.events.transform
-org.grails.plugins.events
-reactor.bus
-reactor.bus.registry
-reactor.bus.selector
-reactor.fn
-reactor.spring.context.annotation
