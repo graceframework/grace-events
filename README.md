@@ -1,16 +1,19 @@
 [![Main branch build status](https://github.com/graceframework/grace-events/workflows/Grace%20CI/badge.svg?style=flat)](https://github.com/graceframework/grace-events/actions?query=workflow%3A%Grace+CI%22)
 [![Apache 2.0 license](https://img.shields.io/badge/License-APACHE%202.0-green.svg?logo=APACHE&style=flat)](https://opensource.org/licenses/Apache-2.0)
-[![Latest version on Maven Central](https://img.shields.io/maven-central/v/org.graceframework/grace-events-core.svg?label=Maven%20Central&logo=apache-maven&style=flat)](https://search.maven.org/search?q=g:org.graceframework)
+[![Latest version on Maven Central](https://img.shields.io/maven-central/v/org.graceframework.events/grace-events-core.svg?label=Maven%20Central&logo=apache-maven&style=flat)](https://search.maven.org/search?q=g:org.graceframework.events)
 [![Grace Document](https://img.shields.io/badge/Grace_Document-latest-blue?style=flat&logo=asciidoctor&logoColor=E40046&labelColor=ffffff&color=f49b06)](https://graceframework.org/grace-events/latest/)
 [![Grace on X](https://img.shields.io/twitter/follow/graceframework?style=social)](https://x.com/graceframework)
 
-[![Groovy Version](https://img.shields.io/badge/Groovy-4.0.27-blue?style=flat&color=4298b8)](https://groovy-lang.org/releasenotes/groovy-4.0.html)
-[![Grace Version](https://img.shields.io/badge/Grace-2024.0.0-blue?style=flat&color=f49b06)](https://github.com/graceframework/grace-framework/releases/tag/v2024.0.0-M1)
-[![Spring Boot Version](https://img.shields.io/badge/Spring_Boot-3.4.7-blue?style=flat&color=6db33f)](https://github.com/spring-projects/spring-boot/releases/tag/v3.4.7)
+[![Java Version](https://img.shields.io/badge/Java-17-blue?style=flat&logo=openjdk&color=437291)](https://docs.oracle.com/en/java/javase/17/)
+[![Groovy Version](https://img.shields.io/badge/Groovy-4.0.28-blue?style=flat&color=4298b8)](https://groovy-lang.org/releasenotes/groovy-4.0.html)
 
 # Grace Events Framework
 
 This project contains APIs and libraries that integrate Grace with various asynchronous libraries and frameworks such as [GPars](https://github.com/GPars/GPars) and [RxJava](https://github.com/ReactiveX/RxJava/tree/1.x), [RxJava2](https://github.com/ReactiveX/RxJava/releases/tag/v2.2.21), [RxJava3](https://github.com/ReactiveX/RxJava/releases).
+
+
+> [!IMPORTANT]
+> Since 7.0, `grace-plugin-events` have been merged into the [Grace framework](https://github.com/graceframework/grace-framework/tree/2024.0.x/grace-plugin-events).
 
 ## Versions
 
