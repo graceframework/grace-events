@@ -1,16 +1,32 @@
+/*
+ * Copyright 2017-2025 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.grails.events.spring
 
-import grails.events.Event
-import grails.events.subscriber.Subscription
+import java.util.concurrent.Callable
+
 import groovy.transform.CompileDynamic
 import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
-import org.grails.events.bus.AbstractEventBus
 import org.springframework.context.ApplicationListener
 import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.context.event.GenericApplicationListenerAdapter
 
-import java.util.concurrent.Callable
+import grails.events.Event
+import grails.events.subscriber.Subscription
+import org.grails.events.bus.AbstractEventBus
 
 /**
  * An event bus that uses the Spring Event Publisher
@@ -27,7 +43,7 @@ class SpringEventBus extends AbstractEventBus {
         this.applicationContext = applicationContext
         applicationContext.addApplicationListener(new GenericApplicationListenerAdapter(
                 new EventBusListener(subscriptions)
-        ) )
+        ))
     }
 
     @Override
@@ -39,6 +55,7 @@ class SpringEventBus extends AbstractEventBus {
 
     @Slf4j
     private static class EventBusListener implements ApplicationListener<SpringEventBusEvent> {
+
         final Map<CharSequence, Collection<Subscription>> registrations
 
         EventBusListener(Map<CharSequence, Collection<Subscription>> registrations) {
@@ -50,11 +67,11 @@ class SpringEventBus extends AbstractEventBus {
         void onApplicationEvent(SpringEventBusEvent event) {
             Event e = event.source
             Closure reply = event.replyTo
-            for(reg in registrations.get(e.id)) {
-                reg.buildTrigger(e, reply)
-                    .proceed()
+            for (reg in registrations.get(e.id)) {
+                reg.buildTrigger(e, reply).proceed()
             }
         }
+
     }
 
 }

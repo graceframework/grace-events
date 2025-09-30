@@ -1,10 +1,26 @@
+/*
+ * Copyright 2017-2025 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.grails.events
+
+import groovy.transform.CompileDynamic
+import groovy.transform.CompileStatic
 
 import grails.events.Event
 import grails.events.subscriber.Subscriber
 import grails.events.trigger.EventTrigger
-import groovy.transform.CompileDynamic
-import groovy.transform.CompileStatic
 
 /**
  * Triggers an event
@@ -27,7 +43,7 @@ class ClosureEventTrigger<T> implements EventTrigger<T> {
         this.subscriberClosure = subscriber
         this.reply = reply
         this.data = event.data
-        Closure closure = (Closure)subscriber
+        Closure closure = (Closure) subscriber
         Class[] parameterTypes = closure.parameterTypes
         this.argCount = parameterTypes.length
         this.eventArg = argCount == 1 && Event.isAssignableFrom(parameterTypes[0])
@@ -40,39 +56,36 @@ class ClosureEventTrigger<T> implements EventTrigger<T> {
 
     @Override
     Object proceed() {
-        int dataLength = data.getClass().isArray() ? ((Object[])data).length : 1
+        int dataLength = data.getClass().isArray() ? ((Object[]) data).length : 1
 
         boolean isSpread = !eventArg && dataLength > 1 && argCount == dataLength
         try {
             def result
-            if(isSpread) {
+            if (isSpread) {
                 result = callSpread(subscriberClosure, data)
-            }
-            else {
-                if(eventArg) {
+            } else {
+                if (eventArg) {
                     result = subscriberClosure.call(event)
-                }
-                else {
+                } else {
                     result = subscriberClosure.call(data)
                 }
             }
-            if(reply != null) {
+            if (reply != null) {
                 return reply.call(result)
             }
             return result
         } catch (Throwable e) {
-            if(reply != null && reply.parameterTypes && reply.parameterTypes[0].isInstance(e)) {
+            if (reply != null && reply.parameterTypes && reply.parameterTypes[0].isInstance(e)) {
                 reply.call(e)
-            }
-            else {
+            } else {
                 throw e
             }
         }
     }
 
-
     @CompileDynamic
     protected Object callSpread(Closure listener, Object data) {
         listener.call(*data)
     }
+
 }

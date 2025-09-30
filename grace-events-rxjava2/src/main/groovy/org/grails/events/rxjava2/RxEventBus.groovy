@@ -1,9 +1,23 @@
+/*
+ * Copyright 2017-2025 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.grails.events.rxjava2
 
-import grails.events.Event
-import grails.events.subscriber.Subscriber
-import grails.events.trigger.EventTrigger
-import grails.events.subscriber.Subscription
+import java.util.concurrent.Callable
+import java.util.concurrent.ConcurrentHashMap
+
 import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
 import io.reactivex.Scheduler
@@ -12,23 +26,25 @@ import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
+
+import grails.events.Event
+import grails.events.subscriber.Subscriber
+import grails.events.subscriber.Subscription
+import grails.events.trigger.EventTrigger
 import org.grails.events.bus.AbstractEventBus
 import org.grails.events.registry.ClosureSubscription
 import org.grails.events.registry.EventSubscriberSubscription
-
-import java.util.concurrent.Callable
-import java.util.concurrent.ConcurrentHashMap
 
 /**
  * An EventBus implementation that uses RxJava
  *
  * @author Graeme Rocher
  * @since 3.3
- *
  */
 @CompileStatic
 @Slf4j
 class RxEventBus extends AbstractEventBus {
+
     protected final Map<CharSequence, PublishSubject> subjects = new ConcurrentHashMap<CharSequence, PublishSubject>().withDefault {
         PublishSubject.create()
     }
@@ -43,11 +59,10 @@ class RxEventBus extends AbstractEventBus {
     protected Callable buildNotificationCallable(Event event, Collection<Subscription> eventSubscriptions, Closure reply) {
         return {
             PublishSubject sub = subjects.get(event.id)
-            if(sub.hasObservers() && !sub.hasComplete()) {
-                if(reply != null) {
+            if (sub.hasObservers() && !sub.hasComplete()) {
+                if (reply != null) {
                     sub.onNext(new EventWithReply(event, reply))
-                }
-                else {
+                } else {
                     sub.onNext(event)
                 }
             }
@@ -56,7 +71,7 @@ class RxEventBus extends AbstractEventBus {
 
     @Override
     protected EventSubscriberSubscription buildSubscriberSubscription(CharSequence eventId, Subscriber subscriber) {
-        String eventKey = eventId.toString()
+        String eventKey = eventId
         Subject subject = subjects.get(eventKey)
 
         return new RxEventSubscriberSubscription(eventId, subscriptions, subscriber, subject, scheduler)
@@ -64,40 +79,40 @@ class RxEventBus extends AbstractEventBus {
 
     @Override
     protected ClosureSubscription buildClosureSubscription(CharSequence eventId, Closure subscriber) {
-        String eventKey = eventId.toString()
+        String eventKey = eventId
         Subject subject = subjects.get(eventKey)
         return new RxClosureSubscription(eventId, subscriptions, subscriber, subject, scheduler)
     }
 
     private static class RxClosureSubscription extends ClosureSubscription {
+
         final Disposable subscription
 
-        RxClosureSubscription(CharSequence eventId, Map<CharSequence, Collection<Subscription>> subscriptions, Closure subscriber, Subject subject, Scheduler scheduler) {
+        RxClosureSubscription(CharSequence eventId, Map<CharSequence, Collection<Subscription>> subscriptions,
+                              Closure subscriber, Subject subject, Scheduler scheduler) {
             super(eventId, subscriptions, subscriber)
             this.subscription = subject.observeOn(scheduler)
-                    .subscribe( { eventObject ->
+                    .subscribe({ eventObject ->
+                        Event event
+                        Closure reply = null
+                        if (eventObject instanceof EventWithReply) {
+                            def eventWithReply = (EventWithReply) eventObject
+                            event = eventWithReply.event
+                            reply = eventWithReply.reply
+                        } else {
+                            event = (Event) eventObject
+                        }
 
-                Event event
-                Closure reply = null
-                if(eventObject  instanceof EventWithReply) {
-                    def eventWithReply = (EventWithReply) eventObject
-                    event = eventWithReply.event
-                    reply = eventWithReply.reply
-                }
-                else {
-                    event = (Event)eventObject
-                }
-
-                EventTrigger trigger = buildTrigger(event, reply)
-                trigger.proceed()
-            }  as Consumer, { Throwable t ->
-                log.error("Error occurred triggering event listener for event [$eventId]: ${t.message}", t)
-            } as Consumer<Throwable>)
+                        EventTrigger trigger = buildTrigger(event, reply)
+                        trigger.proceed()
+                    } as Consumer, { Throwable t ->
+                        log.error("Error occurred triggering event listener for event [$eventId]: ${t.message}", t)
+                    } as Consumer<Throwable>)
         }
 
         @Override
         Subscription cancel() {
-            if(!subscription.isDisposed()) {
+            if (!subscription.isDisposed()) {
                 subscription.dispose()
             }
             return super.cancel()
@@ -107,25 +122,28 @@ class RxEventBus extends AbstractEventBus {
         boolean isCancelled() {
             return subscription.isDisposed()
         }
+
     }
 
     private static class RxEventSubscriberSubscription extends EventSubscriberSubscription {
+
         final Disposable subscription
 
-        RxEventSubscriberSubscription(CharSequence eventId, Map<CharSequence, Collection<Subscription>> subscriptions, Subscriber subscriber, Subject subject, Scheduler scheduler) {
+        RxEventSubscriberSubscription(CharSequence eventId, Map<CharSequence, Collection<Subscription>> subscriptions,
+                                      Subscriber subscriber, Subject subject, Scheduler scheduler) {
             super(eventId, subscriptions, subscriber)
             this.subscription = subject.observeOn(scheduler)
-                    .subscribe( { Object event ->
-                EventTrigger trigger = buildTrigger((Event) event)
-                trigger.proceed()
-            }  as Consumer, { Throwable t ->
-                log.error("Error occurred triggering event listener for event [$eventId]: ${t.message}", t)
-            } as Consumer<Throwable>)
+                    .subscribe({ Object event ->
+                        EventTrigger trigger = buildTrigger((Event) event)
+                        trigger.proceed()
+                    } as Consumer, { Throwable t ->
+                        log.error("Error occurred triggering event listener for event [$eventId]: ${t.message}", t)
+                    } as Consumer<Throwable>)
         }
 
         @Override
         Subscription cancel() {
-            if(!subscription.isDisposed()) {
+            if (!subscription.isDisposed()) {
                 subscription.dispose()
             }
             return super.cancel()
@@ -135,5 +153,7 @@ class RxEventBus extends AbstractEventBus {
         boolean isCancelled() {
             return subscription.isDisposed()
         }
+
     }
+
 }

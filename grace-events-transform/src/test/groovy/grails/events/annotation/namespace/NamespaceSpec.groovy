@@ -1,4 +1,24 @@
+/*
+ * Copyright 2017-2025 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package grails.events.annotation.namespace
+
+import java.util.concurrent.atomic.AtomicInteger
+
+import spock.lang.Specification
+import spock.util.concurrent.PollingConditions
 
 import grails.events.Event
 import grails.events.annotation.Events
@@ -6,13 +26,10 @@ import grails.events.annotation.Publisher
 import grails.events.annotation.Subscriber
 import grails.events.bus.EventBusAware
 import org.grails.events.transform.AnnotatedSubscriber
-import spock.lang.Specification
-import spock.util.concurrent.PollingConditions
-
-import java.util.concurrent.atomic.AtomicInteger
 
 /**
- * Created by graemerocher on 03/04/2017.
+ * @author Graeme Rocher
+ * @since 3.3
  */
 class NamespaceSpec extends Specification {
 
@@ -21,36 +38,40 @@ class NamespaceSpec extends Specification {
         def conditions = new PollingConditions(timeout: 5)
         SumService sumService = new SumService()
         TotalService totalService = new TotalService()
-        AnnotatedSubscriber annotatedSubscriber = (AnnotatedSubscriber)totalService
-        EventBusAware publisher = (EventBusAware)sumService
+        AnnotatedSubscriber annotatedSubscriber = (AnnotatedSubscriber) totalService
+        EventBusAware publisher = (EventBusAware) sumService
         annotatedSubscriber.setTargetEventBus(publisher.getEventBus())
         annotatedSubscriber.registerMethods()
 
         when:
-        sumService.sum(1,2)
-        sumService.sum(1,2)
+        sumService.sum(1, 2)
+        sumService.sum(1, 2)
 
         then:
         conditions.eventually {
             totalService.total.intValue() == 6
-            totalService.eventId == "math:sum"
+            totalService.eventId == 'math:sum'
         }
     }
+
 }
 
 // tag::publisher[]
-@Events(namespace = "math")
+@Events(namespace = 'math')
 class SumService {
+
     @Publisher
     int sum(int a, int b) {
         a + b
     }
+
 }
 // end::publisher[]
 
 // tag::subscriber[]
-@Events(namespace = "math")
+@Events(namespace = 'math')
 class TotalService {
+
     AtomicInteger total = new AtomicInteger(0)
     String eventId
 
@@ -59,6 +80,6 @@ class TotalService {
         eventId = event.id
         total.addAndGet(event.data.intValue())
     }
+
 }
 // end::subscriber[]
-

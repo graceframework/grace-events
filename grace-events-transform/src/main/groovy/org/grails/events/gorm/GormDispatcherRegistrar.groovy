@@ -1,14 +1,30 @@
+/*
+ * Copyright 2017-2025 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.grails.events.gorm
 
-import grails.events.bus.EventBus
 import groovy.transform.CompileStatic
-import org.grails.datastore.gorm.events.ConfigurableApplicationEventPublisher
-import org.grails.datastore.mapping.core.Datastore
-import org.grails.datastore.mapping.engine.event.AbstractPersistenceEvent
 import org.springframework.beans.factory.FactoryBean
 import org.springframework.beans.factory.InitializingBean
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationEventPublisher
+
+import grails.events.bus.EventBus
+import org.grails.datastore.gorm.events.ConfigurableApplicationEventPublisher
+import org.grails.datastore.mapping.core.Datastore
+import org.grails.datastore.mapping.engine.event.AbstractPersistenceEvent
 
 /**
  * Handles registering of GORM event listeners for {@link GormAnnotatedSubscriber} instances
@@ -19,8 +35,11 @@ import org.springframework.context.ApplicationEventPublisher
 @CompileStatic
 class GormDispatcherRegistrar implements FactoryBean<GormDispatcherRegistrar>, InitializingBean {
 
-    @Autowired(required = false) Datastore[] datastores
-    @Autowired(required = false) GormAnnotatedSubscriber[] subscribers
+    @Autowired(required = false)
+    Datastore[] datastores
+
+    @Autowired(required = false)
+    GormAnnotatedSubscriber[] subscribers
 
     protected final EventBus eventBus
 
@@ -45,27 +64,26 @@ class GormDispatcherRegistrar implements FactoryBean<GormDispatcherRegistrar>, I
 
     @Override
     void afterPropertiesSet() throws Exception {
-        if(datastores && subscribers && eventBus != null) {
+        if (datastores && subscribers && eventBus != null) {
             Set<Class<? extends AbstractPersistenceEvent>> subscribedEvents = []
             List<GormAnnotatedListener> listeners = []
-            for(sub in subscribers) {
-                if(sub instanceof GormAnnotatedListener) {
-                    listeners.add((GormAnnotatedListener)sub)
-                }
-                else {
+            for (sub in subscribers) {
+                if (sub instanceof GormAnnotatedListener) {
+                    listeners.add((GormAnnotatedListener) sub)
+                } else {
                     subscribedEvents.addAll(sub.getSubscribedEvents())
                 }
             }
-            for(Datastore datastore in datastores) {
+            for (Datastore datastore in datastores) {
                 ApplicationEventPublisher applicationEventPublisher = datastore.getApplicationEventPublisher()
-                if(applicationEventPublisher instanceof ConfigurableApplicationEventPublisher) {
-
-                    GormEventDispatcher eventDispatcher = new GormEventDispatcher(eventBus, datastore, subscribedEvents, listeners )
-                    ((ConfigurableApplicationEventPublisher)applicationEventPublisher).addApplicationListener(
+                if (applicationEventPublisher instanceof ConfigurableApplicationEventPublisher) {
+                    GormEventDispatcher eventDispatcher = new GormEventDispatcher(eventBus, datastore, subscribedEvents, listeners)
+                    ((ConfigurableApplicationEventPublisher) applicationEventPublisher).addApplicationListener(
                             eventDispatcher
                     )
                 }
             }
         }
     }
+
 }

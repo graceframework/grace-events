@@ -1,4 +1,21 @@
+/*
+ * Copyright 2017-2025 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package grails.events.subscriber
+
+import java.lang.reflect.Method
 
 import groovy.transform.CompileStatic
 import groovy.transform.EqualsAndHashCode
@@ -7,8 +24,6 @@ import groovy.util.logging.Slf4j
 import org.springframework.core.convert.ConversionService
 import org.springframework.core.convert.support.DefaultConversionService
 import org.springframework.util.ReflectionUtils
-
-import java.lang.reflect.Method
 
 /**
  * Invokes a method to trigger an event
@@ -35,7 +50,7 @@ class MethodSubscriber implements Subscriber<Object, Object> {
         this.parameterTypes = method.parameterTypes
         this.parameterLength = parameterTypes.length
 
-        if(target.getClass() != method.getDeclaringClass()) {
+        if (target.getClass() != method.getDeclaringClass()) {
             throw new IllegalArgumentException("The target must be an instance of the declaring class for method $method")
         }
     }
@@ -47,48 +62,40 @@ class MethodSubscriber implements Subscriber<Object, Object> {
                 return ReflectionUtils.invokeMethod(method, target)
             case 1:
                 Class parameterType = parameterTypes[0]
-                if(parameterType.isInstance(arg)) {
+                if (parameterType.isInstance(arg)) {
                     return ReflectionUtils.invokeMethod(method, target, arg)
                 }
-                else {
-                    def converted = conversionService.canConvert(arg.getClass(), parameterType) ? conversionService.convert(arg, parameterType as Class<Object>) : null
-                    if(converted != null) {
-                        return ReflectionUtils.invokeMethod(method, target, converted)
-                    }
-                    else {
-                        log.debug("Could not convert Event argument [$arg] to required type to invoke listener [$method]. Ignoring.")
-                        break
-                    }
-                }
-            default:
-                if(arg != null && arg.getClass().isArray()) {
-                    Object[] array = (Object[]) arg
-
-                    if(array.length == parameterLength) {
-                        Object[] converted = new Object[array.length]
-                        int i = 0
-                        for(o in array) {
-                            Class parameterType = parameterTypes[i]
-                            if(parameterType.isInstance(o)) {
-                                converted[i] = array[i]
-                            }
-                            else {
-                                converted[i] = conversionService.convert(o, parameterType)
-                            }
-                            i++
-                        }
-                        return ReflectionUtils.invokeMethod(method, target, converted)
-                    }
-                    else {
-                        log.debug("Could not convert Event argument [$arg] to required type to invoke listener [$method]. Ignoring.")
-                        break
-                    }
-                }
-                else {
+                def converted = conversionService.canConvert(arg.getClass(), parameterType)
+                        ? conversionService.convert(arg, parameterType as Class<Object>) : null
+                if (converted == null) {
                     log.debug("Could not convert Event argument [$arg] to required type to invoke listener [$method]. Ignoring.")
                     break
                 }
-        }
+                return ReflectionUtils.invokeMethod(method, target, converted)
+            default:
+                if (arg != null && arg.getClass().isArray()) {
+                    Object[] array = (Object[]) arg
 
+                    if (array.length != parameterLength) {
+                        log.debug("Could not convert Event argument [$arg] to required type to invoke listener [$method]. Ignoring.")
+                        break
+                    }
+                    Object[] converted = new Object[array.length]
+                    int i = 0
+                    for (o in array) {
+                        Class parameterType = parameterTypes[i]
+                        if (parameterType.isInstance(o)) {
+                            converted[i] = array[i]
+                        } else {
+                            converted[i] = conversionService.convert(o, parameterType)
+                        }
+                        i++
+                    }
+                    return ReflectionUtils.invokeMethod(method, target, converted)
+                }
+                log.debug("Could not convert Event argument [$arg] to required type to invoke listener [$method]. Ignoring.")
+                break
+        }
     }
+
 }
