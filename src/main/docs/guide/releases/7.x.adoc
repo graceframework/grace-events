@@ -1,0 +1,49 @@
+=== 7.0.0-M1
+
+link:{github}/releases/tag/v7.0.0-M1[release notes]
+
+⭐️ New Features
+
+* Restructure Gradle builds link:{github}/issues/8[#8]
+  - Use Gradle version catalog to simplify dependency management
+  - Sharing Build Logic using buildSrc
+  - Update Checkstyle and CodeNarc plugin
+  - Update CI to skip checkstyle and codenarc
+  - Remove publishing directory
+
+⚡️ Breaking Changes
+
+* Move `grace-plugin-events` to the core framework link:{github}/issues/7[#7]
+* Change grace-events-* submodules' group to 'org.graceframework.events' link:{github}/issues/5[#5]
+* Remove deprecated `grace-events-compat` link:{github}/issues/4[#4]
+* Split grace-events to its' own repo link:{github}/issues/1[#1]
+
+🛠 Improvements
+
+* Update docs
+* Code formatting
+* Update tests
+* Update README
+  - Add document links
+  - Update badge versions of Grace and Spring Boot
+
+🐞 Bug Fixes
+
+* Fixes groovydoc task: because no Groovy Jar was found on class path
+* Remove deprecated gradle/actions/wrapper-validation
+
+🚀 Dependency Upgrades
+
+* Upgrade to Grace 2024.0.0-M1 link:{github}/issues/2[#2]
+* Upgrade to Gradle 8.14.3 link:{github}/issues/6[#6]
+* Upgrade to Groovy 4.0.27 link:{github}/issues/3[#3]
+
+⚙️ Tasks
+
+* Enables code style checking in CI
+* Enables testing in CI
+* Bump gradle/actions from 4.0.0 to 4.4.2
+* Bump actions/checkout from 4 to 5
+* Migrate to Central Portal OSSRH Staging API
+* Update GitHub workflows - Switch to 7.0.x
+* Bump version: 7.0.0-SNAPSHOT

@@ -1,9 +1,9 @@
 introduction: Introduction
 releases:
   title: Release History
+  7.x: What's new in 7.x
   6.x: What's new in 6.x
 usage:
   title: Usage
-  async: Async Plugin
   events: Events Plugin
 support: Support
