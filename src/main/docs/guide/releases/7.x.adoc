@@ -35,8 +35,13 @@ link:{github}/releases/tag/v7.0.0-M1[release notes]
 🚀 Dependency Upgrades
 
 * Upgrade to Grace 2024.0.0-M1 link:{github}/issues/2[#2]
-* Upgrade to Gradle 8.14.3 link:{github}/issues/6[#6]
+* Upgrade to Grace Data 2024.0.0-M1 link:{github}/issues/12[#12]
+* Upgrade to Gradle 8.14.3 link:{github}/issues/6[#6][#6]
+* Upgrade to Groovy 4.0.29 link:{github}/issues/9[#9]
 * Upgrade to Groovy 4.0.27 link:{github}/issues/3[#3]
+* Upgrade to RxJava 3.1.12 link:{github}/issues/10[#10]
+* Upgrade to Spring Framework 6.2.15 link:{github}/issues/13[#13]
+* Upgrade to Spring Framework 6.2.14 link:{github}/issues/11[#11]
 
 ⚙️ Tasks
 
