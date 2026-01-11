@@ -4,5 +4,5 @@ plugins {
 
 dependencies {
     api project(':grace-events-core')
-    implementation libs.spring.context
+    api libs.spring.context
 }

@@ -4,7 +4,7 @@ plugins {
 
 dependencies {
     api project(':grace-events-core')
-    implementation libs.rxjava
+    api libs.rxjava
 
     testImplementation project(':grace-events-transform')
     testImplementation libs.grace.datastore.gorm.test, {
