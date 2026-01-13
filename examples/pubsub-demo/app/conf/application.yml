@@ -17,10 +17,10 @@ info:
         version: '@info.app.version@'
         grailsVersion: '@info.app.grailsVersion@'
 spring:
-    jmx:
-        unique-names: true
-    main:
-        banner-mode: "console"
+    jpa:
+        open-in-view: false
+    liquibase:
+        enabled: false
     groovy:
         template:
             check-template-location: false

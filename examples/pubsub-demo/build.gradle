@@ -2,11 +2,10 @@ plugins {
     id "eclipse"
     id "idea"
     id "war"
-    id "org.graceframework.grace-web"
+    id "org.graceframework.grace-app"
     // id "org.graceframework.asset-pipeline"
-    id "com.github.erdi.webdriver-binaries"
     // id "org.graceframework.grace-gsp"
-    id "org.graceframework.plugins.views-json"
+    id "org.graceframework.grace-json"
 }
 
 group "grace.apps"
@@ -22,13 +21,8 @@ configurations {
 dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     console "org.graceframework:grace-console"
-    implementation "org.springframework.boot:spring-boot-starter-actuator"
-    implementation "org.springframework.boot:spring-boot-starter-logging"
-    implementation "org.springframework.boot:spring-boot-starter-tomcat"
-    implementation "org.springframework.boot:spring-boot-starter-validation"
-    implementation "org.graceframework:grace-boot"
-    implementation "org.graceframework:grace-core"
-    implementation "org.graceframework:grace-logging"
+    implementation "org.graceframework:grace-boot-logging"
+    implementation "org.graceframework:grace-boot-web"
     implementation "org.graceframework:grace-plugin-codecs"
     implementation "org.graceframework:grace-plugin-controllers"
     implementation "org.graceframework:grace-plugin-converters"
@@ -41,39 +35,27 @@ dependencies {
     implementation "org.graceframework:grace-plugin-rest"
     implementation "org.graceframework:grace-plugin-services"
     implementation "org.graceframework:grace-plugin-url-mappings"
-    implementation "org.graceframework.plugins:async"
-    implementation "org.graceframework.plugins:cache"
-    implementation "org.graceframework.plugins:database-migration"
-    implementation "org.graceframework.plugins:events"
-    implementation "org.graceframework.plugins:views-json"
-    // implementation "org.graceframework.plugins:fields"
+    implementation "org.graceframework:grace-plugin-async"
+    implementation "org.graceframework:grace-plugin-cache"
+    implementation "org.graceframework:grace-plugin-database-migration"
+    implementation "org.graceframework:grace-plugin-events"
+    implementation "org.graceframework:grace-views-json"
+    // implementation "org.graceframework:grace-plugin-fields"
     // implementation "org.graceframework:grace-plugin-gsp"
-    implementation "org.graceframework.plugins:hibernate"
-    // implementation "org.graceframework.plugins:scaffolding"
-    runtimeOnly "org.graceframework:grace-events-rxjava"
-    runtimeOnly "org.graceframework:grace-async-rxjava"
+    implementation "org.graceframework:grace-boot-hibernate"
+    // implementation "org.graceframework:grace-plugin-scaffolding"
+    runtimeOnly "org.graceframework.async:grace-async-rxjava"
+    runtimeOnly "org.graceframework.events:grace-events-rxjava"
     profile "org.graceframework.profiles:web"
-    runtimeOnly "org.graceframework.plugins:asset-pipeline-plugin:6.1.0-M1"
+    runtimeOnly "org.graceframework.plugins:asset-pipeline-plugin:7.0.0-M2"
     runtimeOnly "com.h2database:h2"
-    testImplementation "org.graceframework:grace-test-support"
-    testImplementation "org.mockito:mockito-core"
-    testImplementation "org.graceframework.plugins:geb"
-    testImplementation "org.seleniumhq.selenium:selenium-remote-driver:4.2.2"
-    testImplementation "org.seleniumhq.selenium:selenium-api:4.2.2"
-    testImplementation "org.seleniumhq.selenium:selenium-support:4.2.2"
-    testRuntimeOnly "org.seleniumhq.selenium:selenium-chrome-driver:4.2.2"
-    testRuntimeOnly "org.seleniumhq.selenium:selenium-firefox-driver:4.2.2"
+    testImplementation "org.graceframework:grace-boot-test"
+    testImplementation "org.graceframework:grace-plugin-geb"
 }
 
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
-    }
-}
-
-tasks.withType(Jar) {
-    configure {
-        duplicatesStrategy = DuplicatesStrategy.INCLUDE
     }
 }
 
@@ -85,17 +67,6 @@ tasks.withType(GroovyCompile) {
 
 tasks.withType(Test) {
     useJUnitPlatform()
-}
-
-webdriverBinaries {
-    chromedriver {
-        version = '126.0.6478.126'
-        fallbackTo32Bit = true
-    }
-    geckodriver '0.33.0'
-}
-
-tasks.withType(Test) {
     systemProperty "geb.env", System.getProperty('geb.env')
     systemProperty "geb.build.reportsDir", reporting.file("geb/integrationTest")
     systemProperty 'webdriver.chrome.driver', System.getProperty('webdriver.chrome.driver')
