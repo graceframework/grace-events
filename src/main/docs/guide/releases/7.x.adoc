@@ -1,4 +1,29 @@
+=== 7.0.0
+
+link:{github}/releases/tag/v7.0.0[release notes]
+
+🛠 Improvements
+
+* Add release notes for 7.0.0
+* Update events.adoc
+* Update examples to Grace 2024.0.0-RC1 
+
+🚀 Dependency Upgrades
+
+* Upgrade to Grace 2024.0.0-RC1 link:{github}/issues/19[#19]
+* Upgrade to Grace Data 2024.0.0 link:{github}/issues/20[#20]
+* Upgrade to Spring Framework 6.2.17 link:{github}/issues/21[#21]
+
+⚙️ Tasks
+
+* release v7.0.0
+* Upgrade to gradle/actions/setup-gradle@v5.0.2
+* Upgrade to actions/setup-java@v5
+* Upgrade to actions/checkout@v6
+
 === 7.0.0-RC1
+
+link:{github}/releases/tag/v7.0.0-RC1[release notes]
 
 🛠 Improvements
 
@@ -6,7 +31,7 @@
 * Add release notes for 7.0.0-RC1
 * Update copyright in doc.properties
 * Make asynchronous libraries as an api dependency link:{github}/issues/15[#15]
-* Update examples to Grace 2024.0.0-M2 
+* Update examples to Grace 2024.0.0-M2
 
 🚀 Dependency Upgrades
 
@@ -14,6 +39,10 @@
 * Upgrade to Grace Data 2024.0.0-RC1 link:{github}/issues/17[#17]
 * Upgrade to Gradle 8.14.4 link:{github}/issues/18[#18]
 * Upgrade to Groovy 4.0.30 link:{github}/issues/16[#16]
+
+⚙️ Tasks
+
+* release v7.0.0-RC1
 
 === 7.0.0-M1
 
