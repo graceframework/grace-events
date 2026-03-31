@@ -5,39 +5,35 @@
 | **ArtifactId**
 | **Description**
 
-| org.graceframework
+| org.graceframework.events
 | grace-events-core
 |
 
-| org.graceframework
-| grace-events-compat
-|
-
-| org.graceframework
+| org.graceframework.events
 | grace-events-transform
 |
 
-| org.graceframework
+| org.graceframework.events
 | grace-events-gpars
 |
 
-| org.graceframework
+| org.graceframework.events
 | grace-events-spring
 |
 
-| org.graceframework
+| org.graceframework.events
 | grace-events-rxjava
 |
 
-| org.graceframework
+| org.graceframework.events
 | grace-events-rxjava2
 |
 
-| org.graceframework
+| org.graceframework.events
 | grace-events-rxjava3
 |
 
-| org.graceframework.plugins
-| events
+| org.graceframework
+| grace-plugin-events
 |
 |===
