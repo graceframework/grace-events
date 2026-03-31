@@ -47,7 +47,7 @@ dependencies {
     runtimeOnly "org.graceframework.async:grace-async-rxjava"
     runtimeOnly "org.graceframework.events:grace-events-rxjava"
     profile "org.graceframework.profiles:web"
-    runtimeOnly "org.graceframework.plugins:asset-pipeline-plugin:7.0.0-M2"
+    runtimeOnly "org.graceframework.plugins:asset-pipeline-plugin:7.0.0-RC1"
     runtimeOnly "com.h2database:h2"
     testImplementation "org.graceframework:grace-boot-test"
     testImplementation "org.graceframework:grace-plugin-geb"
