@@ -1,14 +1,16 @@
 plugins {
     id "eclipse"
     id "idea"
-    id "war"
+    id "groovy"
     id "org.graceframework.grace-app"
-    // id "org.graceframework.asset-pipeline"
-    // id "org.graceframework.grace-gsp"
+    id "org.graceframework.asset-pipeline" version '7.0.0'
+    id "org.graceframework.grace-gsp"
     id "org.graceframework.grace-json"
 }
 
-group "grace.apps"
+ext['grace-plugin-asset-pipeline.version'] = '7.0.0'
+
+group = "org.graceframework.examples"
 
 repositories {
     mavenCentral()
@@ -19,38 +21,27 @@ configurations {
 }
 
 dependencies {
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
+    developmentOnly "org.springframework.boot:spring-boot-devtools"
     console "org.graceframework:grace-console"
-    implementation "org.graceframework:grace-boot-logging"
-    implementation "org.graceframework:grace-boot-web"
-    implementation "org.graceframework:grace-plugin-codecs"
-    implementation "org.graceframework:grace-plugin-controllers"
-    implementation "org.graceframework:grace-plugin-converters"
-    implementation "org.graceframework:grace-plugin-databinding"
-    implementation "org.graceframework:grace-plugin-datasource"
-    implementation "org.graceframework:grace-plugin-domain-class"
-    implementation "org.graceframework:grace-plugin-i18n"
-    implementation "org.graceframework:grace-plugin-interceptors"
-    implementation "org.graceframework:grace-plugin-management"
-    implementation "org.graceframework:grace-plugin-rest"
-    implementation "org.graceframework:grace-plugin-services"
-    implementation "org.graceframework:grace-plugin-url-mappings"
-    implementation "org.graceframework:grace-plugin-async"
-    implementation "org.graceframework:grace-plugin-cache"
-    implementation "org.graceframework:grace-plugin-database-migration"
-    implementation "org.graceframework:grace-plugin-events"
-    implementation "org.graceframework:grace-views-json"
-    // implementation "org.graceframework:grace-plugin-fields"
-    // implementation "org.graceframework:grace-plugin-gsp"
+    implementation "org.graceframework:grace-boot-async"
+    implementation "org.graceframework:grace-boot-cache"
+    implementation "org.graceframework:grace-boot-events"
     implementation "org.graceframework:grace-boot-hibernate"
-    // implementation "org.graceframework:grace-plugin-scaffolding"
-    runtimeOnly "org.graceframework.async:grace-async-rxjava"
-    runtimeOnly "org.graceframework.events:grace-events-rxjava"
+    implementation "org.graceframework:grace-boot-logging"
+    implementation "org.graceframework:grace-boot-persistence"
+    implementation "org.graceframework:grace-boot-plugin"
+    implementation "org.graceframework:grace-boot-validation"
+    implementation "org.graceframework:grace-boot-web"
+    implementation "org.graceframework:grace-plugin-database-migration"
+    implementation "org.graceframework:grace-plugin-gsp"
+    implementation "org.graceframework:grace-plugin-management"
+    implementation "org.graceframework:grace-plugin-services"
+    implementation "org.graceframework:grace-plugin-taglibs"
+    implementation "org.graceframework:grace-views-json"
     profile "org.graceframework.profiles:web"
-    runtimeOnly "org.graceframework.plugins:asset-pipeline-plugin:7.0.0-RC1"
     runtimeOnly "com.h2database:h2"
+    runtimeOnly "org.graceframework.plugins:asset-pipeline-plugin"
     testImplementation "org.graceframework:grace-boot-test"
-    testImplementation "org.graceframework:grace-plugin-geb"
 }
 
 java {
@@ -67,8 +58,4 @@ tasks.withType(GroovyCompile) {
 
 tasks.withType(Test) {
     useJUnitPlatform()
-    systemProperty "geb.env", System.getProperty('geb.env')
-    systemProperty "geb.build.reportsDir", reporting.file("geb/integrationTest")
-    systemProperty 'webdriver.chrome.driver', System.getProperty('webdriver.chrome.driver')
-    systemProperty 'webdriver.gecko.driver', System.getProperty('webdriver.gecko.driver')
 }
