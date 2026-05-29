@@ -1,3 +1,12 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath libs.groovy.toml
+    }
+}
+
 plugins {
     id 'java-library'
     id 'groovy'
@@ -14,6 +23,15 @@ ext.'signing.keyId' = rootProject.hasProperty('signing.keyId') ? rootProject.get
 ext.'signing.password' = rootProject.hasProperty('signing.password') ? rootProject.getProperty('signing.password') : System.getenv('SIGNING_PASSPHRASE')
 ext.'signing.secretKeyRingFile' = rootProject.hasProperty('signing.secretKeyRingFile') ? rootProject.getProperty('signing.secretKeyRingFile') : "${System.properties['user.home']}${File.separator}.gnupg${File.separator}secring.gpg"
 ext.isReleaseVersion = !projectVersion.endsWith('SNAPSHOT')
+
+def toml = new groovy.toml.TomlSlurper()
+def versions = toml.parse(rootProject.file('gradle/libs.versions.toml')).versions
+def groovyVersion = versions['groovy']
+def graceDataVersion = versions['grace-data']
+def rxJavaVersion = versions['rxjava']
+def rxJava2Version = versions['rxjava2']
+def rxJava3Version = versions['rxjava3']
+def springFrameworkVersion = versions['spring-framework']
 
 version = project.projectVersion
 group = 'org.graceframework.events'
@@ -40,8 +58,17 @@ configurations {
 }
 
 dependencies {
-    documentation libs.javaparser
     documentation libs.groovy.core
+    documentation libs.grace.datastore.core
+    documentation libs.grace.datastore.gorm
+    documentation libs.jakarta.annotation.api
+    documentation libs.javaparser
+    documentation libs.rxjava
+    documentation libs.rxjava2
+    documentation libs.rxjava3
+    documentation libs.spring.beans
+    documentation libs.spring.context
+    documentation libs.spring.tx
 }
 
 tasks.withType(Test) {
@@ -91,6 +118,18 @@ tasks.withType(Groovydoc) {
     }
     source = files
     classpath += configurations.documentation
+    link('https://docs.oracle.com/en/java/javase/17/docs/api/java.base/', 'java.', 'jakarta.')
+    link("https://docs.groovy-lang.org/docs/groovy-${groovyVersion}/html/gapi/", 'groovy.', 'org.codehaus.groovy.', 'org.apache.groovy.')
+    link("http://reactivex.io/RxJava/javadoc/", 'rx.', 'rx.subjects.')
+    link("http://reactivex.io/RxJava/2.x/javadoc/${rxJava2Version}/", 'io.reactivex.', 'io.reactivex.subjects.')
+    link("http://reactivex.io/RxJava/3.x/javadoc/${rxJava3Version}/", 'io.reactivex.rxjava3.', 'io.reactivex.rxjava3.subjects.')
+    link(
+        "https://docs.spring.io/spring-framework/docs/${springFrameworkVersion}/javadoc-api", 
+        'org.springframework.core.', 'org.springframework.context.', 'org.springframework.beans.',
+        'org.springframework.dao.', 'org.springframework.transaction.', 
+        'org.springframework.ui.', 'org.springframework.validation', 'org.springframework.web.'
+    )
+    link("https://graceframework.org/grace-data/${graceDataVersion}/api/", 'org.grails.datastore.')
 }
 
 publishGuide {
