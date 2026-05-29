@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2025 the original author or authors.
+ * Copyright 2017-2026 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentLinkedQueue
 
 import groovy.transform.CompileStatic
 import org.springframework.transaction.event.TransactionPhase
-import org.springframework.transaction.support.TransactionSynchronizationAdapter
+import org.springframework.transaction.support.TransactionSynchronization
 import org.springframework.transaction.support.TransactionSynchronizationManager
 
 import grails.events.Event
@@ -37,6 +37,7 @@ import org.grails.events.registry.EventSubscriberSubscription
  * Abstract event bus impl
  *
  * @author Graeme Rocher
+ * @author Michael Yan
  * @since 6.1
  */
 @CompileStatic
@@ -197,7 +198,7 @@ abstract class AbstractEventBus implements EventBus {
 
     }
 
-    protected static class EventTriggerTransactionSynchronization extends TransactionSynchronizationAdapter {
+    protected static class EventTriggerTransactionSynchronization implements TransactionSynchronization {
 
         final NotificationTrigger notificationTrigger
         final TransactionPhase transactionPhase
