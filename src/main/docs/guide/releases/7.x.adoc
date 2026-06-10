@@ -1,3 +1,27 @@
+=== 7.1.0
+
+link:{github}/releases/tag/v7.1.0[release notes]
+
+🛠 Improvements
+
+* Add release notes for 7.1.0
+* Update examples to Grace 2024.1.0-RC2
+* Update README
+
+🚀 Dependency Upgrades
+
+* Upgrade to Byte Buddy 1.17.8 link:{github}/issues/44[#44]
+* Upgrade to Grace Data 2024.1.0 link:{github}/issues/39[#39]
+* Upgrade to Grace Gradle Plugin 2024.1.0-RC2 link:{github}/issues/38[#38]
+* Upgrade to Groovy 4.0.32 link:{github}/issues/40[#40]
+* Upgrade to JavaParser Core 3.28.2 link:{github}/issues/41[#41]
+* Upgrade to SLF4J 2.0.18 link:{github}/issues/42[#42]
+* Upgrade to Spring Framework 6.2.19 link:{github}/issues/43[#43]
+
+⚙️ Tasks
+
+* Release v7.1.0
+
 === 7.1.0-RC1
 
 link:{github}/releases/tag/v7.1.0-RC1[release notes]
