@@ -44,13 +44,10 @@ dependencies {
 
     testImplementation libs.bytebuddy
     testImplementation libs.objenesis
-    testImplementation libs.groovy.test.junit5, {
-        exclude group: 'org.junit.platform', module: 'junit-platform-launcher'
-        exclude group: 'org.junit.jupiter', module: 'junit-jupiter-engine'
-    }
     testImplementation libs.junit.jupiter.api
     testImplementation libs.junit.jupiter.engine
     testImplementation libs.junit.platform.launcher
+    testImplementation libs.junit.platform.suite
     testImplementation libs.slf4j.simple
     testImplementation libs.spock.core
 
