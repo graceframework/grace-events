@@ -21,29 +21,29 @@ If you wish to use a popular async framework such as RxJava as the `EventBus` im
 [source,groovy,subs="attributes"]
 .build.gradle
 ----
-implementation "org.graceframework:grace-events-rxjava3:{version}"
+implementation "org.graceframework.events:grace-events-rxjava3:{version}"
 ----
 
-The following table summarizes async framework support and the necessary dependency:
+The following table summarizes events framework support and the necessary dependency:
 
 .EventBus Implementations
 |===
 |Framework | Dependency | Implementation Class
 
 |GPars 1.2.x
-|`grace-events-gpars`
+|`org.graceframework.events:grace-events-gpars`
 |`org.grails.events.gpars.ActorEventBus`
 
 |RxJava 1.2.x
-|`grace-events-rxjava`
+|`org.graceframework.events:grace-events-rxjava`
 |`org.grails.events.rxjava.RxEventBus`
 
 |RxJava 2.x
-|`grace-events-rxjava2`
+|`org.graceframework.events:grace-events-rxjava2`
 |`org.grails.events.rxjava2.RxEventBus`
 
 |RxJava 3.x
-|`grace-events-rxjava3`
+|`org.graceframework.events:grace-events-rxjava3`
 |`org.grails.events.rxjava3.RxEventBus`
 
 |===
