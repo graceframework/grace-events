@@ -1,3 +1,24 @@
+=== 7.2.0
+
+link:{github}/releases/tag/v7.2.0[release notes]
+
+🛠 Improvements
+
+* Add release notes for 7.2.0
+* Update events guides
+* Include LICENSE and NOTICE files into the JAR file link:{github}/issues/74[#74]
+
+🚀 Dependency Upgrades
+
+* Upgrade to Grace Data 2024.2.0 link:{github}/issues/76[#76]
+* Upgrade to Gradle 8.14.7 link:{github}/issues/70[#70]
+* Upgrade to Gradle 8.14.6 link:{github}/issues/63[#63]
+* Upgrade Java version in sdkmanrc to 17.0.20-zulu link:{github}/issues/66[#66]
+
+⚙️ Tasks
+
+* Release v7.2.0
+
 === 7.2.0-RC1
 
 link:{github}/releases/tag/v7.2.0-RC1[release notes]
